@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verjaardag Toevoegen</title>
+    <!-- Favicon -->
+    <link rel="icon" href="/images/ico.ico" type="image/x-icon">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PC66SXNZ1Q"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-PC66SXNZ1Q');
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #2997ff;
+            text-align: center;
+        }
+        .form-container {
+            background-color: #1c1c1e;
+            padding: 30px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .input-field {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #2c2c2e;
+            color: white;
+            font-size: 16px;
+        }
+        .apple-button {
+            display: block;
+            width: 100%;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: 600;
+            background-color: #FF9500;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 100px;
+            transition: background-color 0.3s, transform 0.1s;
+            text-align: center;
+            cursor: pointer;
+        }
+        .apple-button:hover {
+            background-color: #FFAA33;
+        }
+        .apple-button:active {
+            transform: scale(0.98);
+        }
+        #confirmation {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #34C759;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #2997ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Verjaardag Toevoegen</h1>
+    <div class="form-container">
+        <form action="https://formspree.io/f/movqqodb" method="POST" id="birthday-form">
+            <label for="voornaam">Voornaam:</label>
+            <input type="text" id="voornaam" name="voornaam" class="input-field" required>
+            
+            <label for="achternaam">Achternaam:</label>
+            <input type="text" id="achternaam" name="achternaam" class="input-field" required>
+            
+            <label for="dag">Dag:</label>
+            <input type="number" id="dag" name="dag" class="input-field" min="1" max="31" required>
+            
+            <label for="maand">Maand:</label>
+            <input type="number" id="maand" name="maand" class="input-field" min="1" max="12" required>
+            
+            <label for="jaar">Jaar:</label>
+            <input type="number" id="jaar" name="jaar" class="input-field" min="1900" max="2100" required>
+            
+            <label for="message">Extra bericht (optioneel):</label>
+            <textarea id="message" name="message" class="input-field" rows="3"></textarea>
+            
+            <button type="submit" class="apple-button">Verjaardag toevoegen</button>
+        </form>
+    </div>
+    <div id="confirmation"></div>
+
+    <script>
+        const form = document.getElementById('birthday-form');
+        const confirmation = document.getElementById('confirmation');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(form);
+            const voornaam = formData.get('voornaam');
+            const achternaam = formData.get('achternaam');
+            const dag = formData.get('dag').padStart(2, '0');
+            const maand = formData.get('maand').padStart(2, '0');
+            const jaar = formData.get('jaar');
+
+            const confirmationMessage = `Oh ${voornaam} ${achternaam}, wat leuk dat je op ${dag} ${getMonthName(maand)} ${jaar} jarig bent, het is gelukt!`;
+            confirmation.textContent = confirmationMessage;
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    confirmation.textContent += ' Bedankt voor het toevoegen van je verjaardag!';
+                    form.reset();
+                } else {
+                    throw new Error('Er is iets misgegaan neem alsjeblieft contact op: hi@benjamintjoa.nl');
+                }
+            }).catch(error => {
+                confirmation.textContent = error.message;
+                confirmation.style.color = '#FF3B30';
+            });
+        });
+
+        function getMonthName(month) {
+            const months = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"];
+            return months[parseInt(month) - 1];
+        }
+    </script>
+</body>
+</html>
