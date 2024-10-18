@@ -25,7 +25,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
         }
         #datetime {
             font-size: 24px;
@@ -47,51 +47,72 @@
             color: transparent;
             display: inline-block;
         }
+        .apple-button {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: 600;
+            background-color: #FF9500;
+            color: white;
+            text-decoration: none;
+            border-radius: 100px; /* Zeer ronde hoeken zoals Apple-knoppen */
+            transition: background-color 0.3s, transform 0.1s;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .apple-button:hover {
+            background-color: #FFAA33;
+        }
+        .apple-button:active {
+            transform: scale(0.98);
+        }
     </style>
 </head>
 <body>
     <div id="datetime"></div>
     <div id="birthday-person" class="rainbow-text"></div>
     <div id="birthday-message"></div>
+    <a href="https://verjaardag.benjamintjoa.nl/toevoegen" class="apple-button">Verjaardag toevoegen</a>
 
     <script>
         const leerlingen = {
-            "2223069": { voornaam: "Linde", achternaam: "Constandse", verjaardag: "01-04-2010" },
+            "2223069": { voornaam: "Linde", achternaam: "Constandse", verjaardag: "placeholder" },
             "2223215": { voornaam: "Benjamin", achternaam: "Tjoa", verjaardag: "25-04-2010" },
-            "2324001": { voornaam: "Charlotte", achternaam: "Adema", verjaardag: "01-04-2010" },
-            "2324002": { voornaam: "Yfke", achternaam: "Agterhof", verjaardag: "01-04-2010" },
-            "2324005": { voornaam: "Elena", achternaam: "Al-Kinani", verjaardag: "01-04-2010" },
-            "2324011": { voornaam: "Olivia", achternaam: "Aznar-Oswald", verjaardag: "01-04-2010" },
-            "2324030": { voornaam: "Isa", achternaam: "Buijs", verjaardag: "01-04-2010" },
-            "2324033": { voornaam: "Kemal", achternaam: "Ceylan", verjaardag: "01-04-2010" },
-            "2324037": { voornaam: "Lotte", achternaam: "Costantin", verjaardag: "01-04-2010" },
-            "2324038": { voornaam: "Sara", achternaam: "Dekker", verjaardag: "01-04-2010" },
-            "2324048": { voornaam: "Sebastiaan", achternaam: "Filmer", verjaardag: "01-04-2010" },
-            "2324057": { voornaam: "Lumen", achternaam: "Hokstam", verjaardag: "01-04-2010" },
+            "2324001": { voornaam: "Charlotte", achternaam: "Adema", verjaardag: "placeholder" },
+            "2324002": { voornaam: "Yfke", achternaam: "Agterhof", verjaardag: "placeholder" },
+            "2324005": { voornaam: "Elena", achternaam: "Al-Kinani", verjaardag: "placeholder" },
+            "2324011": { voornaam: "Olivia", achternaam: "Aznar-Oswald", verjaardag: "placeholder" },
+            "2324030": { voornaam: "Isa", achternaam: "Buijs", verjaardag: "placeholder" },
+            "2324033": { voornaam: "Kemal", achternaam: "Ceylan", verjaardag: "placeholder" },
+            "2324037": { voornaam: "Lotte", achternaam: "Costantin", verjaardag: "placeholder" },
+            "2324038": { voornaam: "Sara", achternaam: "Dekker", verjaardag: "placeholder" },
+            "2324048": { voornaam: "Sebastiaan", achternaam: "Filmer", verjaardag: "placeholder" },
+            "2324057": { voornaam: "Lumen", achternaam: "Hokstam", verjaardag: "placeholder" },
             "2324064": { voornaam: "Loek", achternaam: "de Jonge", verjaardag: "18-10-2011" },
-            "2324084": { voornaam: "Taeke", achternaam: "van der Lugt", verjaardag: "01-04-2010" },
-            "2324091": { voornaam: "Merlijn", achternaam: "Massa", verjaardag: "01-04-2010" },
-            "2324110": { voornaam: "Fenna", achternaam: "Rasch", verjaardag: "01-04-2010" },
-            "2324116": { voornaam: "Sasha", achternaam: "Rodriguez", verjaardag: "01-04-2010" },
-            "2324121": { voornaam: "Hanna", achternaam: "van Ruiten", verjaardag: "01-04-2010" },
-            "2324130": { voornaam: "Olivier", achternaam: "Soyogul", verjaardag: "01-04-2010" },
-            "2324131": { voornaam: "Dexter", achternaam: "Speelman", verjaardag: "01-04-2010" },
-            "2324139": { voornaam: "Julian", achternaam: "Streefland", verjaardag: "01-04-2010" },
-            "2324150": { voornaam: "Anne-Louise", achternaam: "van Veen", verjaardag: "01-04-2010" },
-            "2324153": { voornaam: "Luc", achternaam: "Visser", verjaardag: "01-04-2010" },
-            "2324156": { voornaam: "Cas", achternaam: "Vrisekoop", verjaardag: "01-04-2010" },
-            "2324159": { voornaam: "Daniel", achternaam: "Westerkamp", verjaardag: "01-04-2010" },
-            "2324162": { voornaam: "Olivia", achternaam: "van der Wurff", verjaardag: "01-04-2010" },
-            "2324165": { voornaam: "Hanna", achternaam: "Zhang", verjaardag: "01-04-2010" },
-            "2324196": { voornaam: "Max", achternaam: "Carrière", verjaardag: "01-04-2010" },
-            "2324221": { voornaam: "David", achternaam: "Prinsen", verjaardag: "01-04-2010" },
-            "2324227": { voornaam: "Scott", achternaam: "Rusman", verjaardag: "01-04-2010" },
-            "2425294": { voornaam: "Toon", achternaam: "de Vrieze", verjaardag: "01-04-2010" },
-            "VRA": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "01-04-2010" },
-            "Anita": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "01-04-2010" },
-            "anita": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "01-04-2010" },
-            "Anita de Vries": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "01-04-2010" },
-            "Anita De Vries": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "01-04-2010" }
+            "2324084": { voornaam: "Taeke", achternaam: "van der Lugt", verjaardag: "placeholder" },
+            "2324091": { voornaam: "Merlijn", achternaam: "Massa", verjaardag: "placeholder" },
+            "2324110": { voornaam: "Fenna", achternaam: "Rasch", verjaardag: "placeholder" },
+            "2324116": { voornaam: "Sasha", achternaam: "Rodriguez", verjaardag: "placeholder" },
+            "2324121": { voornaam: "Hanna", achternaam: "van Ruiten", verjaardag: "placeholder" },
+            "2324130": { voornaam: "Olivier", achternaam: "Soyogul", verjaardag: "placeholder" },
+            "2324131": { voornaam: "Dexter", achternaam: "Speelman", verjaardag: "placeholder" },
+            "2324139": { voornaam: "Julian", achternaam: "Streefland", verjaardag: "11-03-2011" },
+            "2324150": { voornaam: "Anne-Louise", achternaam: "van Veen", verjaardag: "placeholder" },
+            "2324153": { voornaam: "Luc", achternaam: "Visser", verjaardag: "placeholder" },
+            "2324156": { voornaam: "Cas", achternaam: "Vrisekoop", verjaardag: "placeholder" },
+            "2324159": { voornaam: "Daniel", achternaam: "Westerkamp", verjaardag: "placeholder" },
+            "2324162": { voornaam: "Olivia", achternaam: "van der Wurff", verjaardag: "placeholder" },
+            "2324165": { voornaam: "Hanna", achternaam: "Zhang", verjaardag: "placeholder" },
+            "2324196": { voornaam: "Max", achternaam: "Carrière", verjaardag: "placeholder" },
+            "2324221": { voornaam: "David", achternaam: "Prinsen", verjaardag: "placeholder" },
+            "2324227": { voornaam: "Scott", achternaam: "Rusman", verjaardag: "placeholder" },
+            "2425294": { voornaam: "Toon", achternaam: "de Vrieze", verjaardag: "placeholder" },
+            "LAH": { voornaam: "Bénedicte", achternaam: "Lahnemann", verjaardag: "placeholder" },
+            "VRA": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "placeholder" },
+            "Anita": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "placeholder" },
+            "anita": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "placeholder" },
+            "Anita de Vries": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "placeholder" },
+            "Anita De Vries": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "placeholder" }
         };
 
         function updateDateTime() {
