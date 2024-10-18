@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verjaardagswebsite</title>
+    <!-- Favicon -->
+    <link rel="icon" href="/images/ico.ico" type="image/x-icon">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PC66SXNZ1Q"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-PC66SXNZ1Q');
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: black;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #datetime {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2997ff;
+        }
+        #birthday-message {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #34C759;
+        }
+        .rainbow-text {
+            font-size: 72px;
+            font-weight: bold;
+            background: -webkit-linear-gradient(left, #cb1333, #de45c1, #b96be2, #84a9e0, #23d43b, #d0bb08, #eb6d17);
+            background: linear-gradient(90deg, #cb1333, #de45c1, #b96be2, #84a9e0, #23d43b, #d0bb08, #eb6d17);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="datetime"></div>
+    <div id="birthday-person" class="rainbow-text"></div>
+    <div id="birthday-message"></div>
+
+    <script>
+        const leerlingen = {
+            "2223069": { voornaam: "Linde", achternaam: "Constandse", verjaardag: "01-04-2010" },
+            "2223215": { voornaam: "Benjamin", achternaam: "Tjoa", verjaardag: "25-04-2010" },
+            "2324001": { voornaam: "Charlotte", achternaam: "Adema", verjaardag: "01-04-2010" },
+            "2324002": { voornaam: "Yfke", achternaam: "Agterhof", verjaardag: "01-04-2010" },
+            "2324005": { voornaam: "Elena", achternaam: "Al-Kinani", verjaardag: "01-04-2010" },
+            "2324011": { voornaam: "Olivia", achternaam: "Aznar-Oswald", verjaardag: "01-04-2010" },
+            "2324030": { voornaam: "Isa", achternaam: "Buijs", verjaardag: "01-04-2010" },
+            "2324033": { voornaam: "Kemal", achternaam: "Ceylan", verjaardag: "01-04-2010" },
+            "2324037": { voornaam: "Lotte", achternaam: "Costantin", verjaardag: "01-04-2010" },
+            "2324038": { voornaam: "Sara", achternaam: "Dekker", verjaardag: "01-04-2010" },
+            "2324048": { voornaam: "Sebastiaan", achternaam: "Filmer", verjaardag: "01-04-2010" },
+            "2324057": { voornaam: "Lumen", achternaam: "Hokstam", verjaardag: "01-04-2010" },
+            "2324064": { voornaam: "Loek", achternaam: "de Jonge", verjaardag: "18-10-2011" },
+            "2324084": { voornaam: "Taeke", achternaam: "van der Lugt", verjaardag: "01-04-2010" },
+            "2324091": { voornaam: "Merlijn", achternaam: "Massa", verjaardag: "01-04-2010" },
+            "2324110": { voornaam: "Fenna", achternaam: "Rasch", verjaardag: "01-04-2010" },
+            "2324116": { voornaam: "Sasha", achternaam: "Rodriguez", verjaardag: "01-04-2010" },
+            "2324121": { voornaam: "Hanna", achternaam: "van Ruiten", verjaardag: "01-04-2010" },
+            "2324130": { voornaam: "Olivier", achternaam: "Soyogul", verjaardag: "01-04-2010" },
+            "2324131": { voornaam: "Dexter", achternaam: "Speelman", verjaardag: "01-04-2010" },
+            "2324139": { voornaam: "Julian", achternaam: "Streefland", verjaardag: "01-04-2010" },
+            "2324150": { voornaam: "Anne-Louise", achternaam: "van Veen", verjaardag: "01-04-2010" },
+            "2324153": { voornaam: "Luc", achternaam: "Visser", verjaardag: "01-04-2010" },
+            "2324156": { voornaam: "Cas", achternaam: "Vrisekoop", verjaardag: "01-04-2010" },
+            "2324159": { voornaam: "Daniel", achternaam: "Westerkamp", verjaardag: "01-04-2010" },
+            "2324162": { voornaam: "Olivia", achternaam: "van der Wurff", verjaardag: "01-04-2010" },
+            "2324165": { voornaam: "Hanna", achternaam: "Zhang", verjaardag: "01-04-2010" },
+            "2324196": { voornaam: "Max", achternaam: "Carrière", verjaardag: "01-04-2010" },
+            "2324221": { voornaam: "David", achternaam: "Prinsen", verjaardag: "01-04-2010" },
+            "2324227": { voornaam: "Scott", achternaam: "Rusman", verjaardag: "01-04-2010" },
+            "2425294": { voornaam: "Toon", achternaam: "de Vrieze", verjaardag: "01-04-2010" },
+            "VRA": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "01-04-2010" },
+            "Anita": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "01-04-2010" },
+            "anita": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "01-04-2010" },
+            "Anita de Vries": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "01-04-2010" },
+            "Anita De Vries": { voornaam: "Anita", achternaam: "de Vries", verjaardag: "01-04-2010" }
+        };
+
+        function updateDateTime() {
+            const now = new Date();
+            const options = {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                timeZone: 'Europe/Amsterdam'
+            };
+            const formattedDate = now.toLocaleString('nl-NL', options);
+            document.getElementById('datetime').textContent = formattedDate;
+
+            checkBirthday(now);
+        }
+
+        function checkBirthday(date) {
+            const today = `${String(date.getDate()).padStart(2, '0')}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+            
+            for (const [id, leerling] of Object.entries(leerlingen)) {
+                const [day, month] = leerling.verjaardag.split('-');
+                if (`${day}-${month}` === today) {
+                    document.getElementById('birthday-person').textContent = `${leerling.voornaam} ${leerling.achternaam}`;
+                    const age = date.getFullYear() - parseInt(leerling.verjaardag.split('-')[2]);
+                    document.getElementById('birthday-message').textContent = `is vandaag ${age} geworden!`;
+                    return;
+                }
+            }
+
+            document.getElementById('birthday-person').textContent = "";
+            document.getElementById('birthday-message').textContent = "";
+        }
+
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
+</body>
+</html>
